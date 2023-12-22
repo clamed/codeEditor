@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Code Editor</title>
+     <style>
+         body {
+             margin: 0;
+             padding: 0;
+             overflow: hidden;
+         }
+
+         #editor {
+             height: 100vh;
+         }
+     </style>
+</head>
+<body>
+     <div id="editor"></div>
+
+     <script src="https://unpkg.com/monaco-editor@0.27.0/min/vs/loader.js"></script>
+     <script>
+         require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@0.27.0/min/vs' }});
+        
+         require(['vs/editor/editor.main'], function () {
+             // Create a code editor
+             var editor = monaco.editor.create(document.getElementById('editor'), {
+                 value: "//Your code is here...",
+                 language: "javascript",
+                 theme: "vs-dark"
+             });
+
+             // Add a code change event handler
+             editor.onDidChangeModelContent(function () {
+                 // Get the current code from the editor
+                 var currentCode = editor.getValue();
+
+                 // Add additional logic when changing code
+                 console.log('Code changed:', currentCode);
+             });
+         });
+     </script>
+</body>
+</html>
